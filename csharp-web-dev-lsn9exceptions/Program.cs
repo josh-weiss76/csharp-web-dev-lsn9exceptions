@@ -8,7 +8,6 @@ namespace csharp_web_dev_lsn9exceptions
     {
         static double Divide(double x, double y)
         {
-            // Write your code here!
             try
             {
                 if (y != 0)
@@ -30,8 +29,29 @@ namespace csharp_web_dev_lsn9exceptions
 
         static int CheckFileExtension(string fileName)
         {
-            int result = 0;
-            return result;// Write your code here!
+            try
+            {
+                if (fileName.Contains(".cs"))
+                {
+                    int pointValue = 1;
+                    return pointValue;
+                }
+                else if (fileName != "")
+                {
+                    int pointValue = 0;
+                    return pointValue;
+                }
+                else 
+                {
+                    throw new ArgumentNullException("No student submission");
+                }
+            }
+            catch(ArgumentNullException)
+            {
+                Console.WriteLine("The student does not have a file submission in the system, check with student on status of project.");
+                int pointValue = 0;
+                return pointValue;
+            }
         }
 
 
@@ -49,6 +69,21 @@ namespace csharp_web_dev_lsn9exceptions
             students.Add("Elizabeth", "MyCode.cs");
             students.Add("Stefanie", "CoolProgram.cs");
 
+
+            List<string> name = new List<string>();
+            List<string> submission = new List<string>();
+            foreach (string student in students.Keys)
+            {
+                name.Add(student);
+            }
+            foreach (string project in students.Values)
+            {
+                submission.Add(project);
+            }
+            for (int j = 0; j < name.Count; j++)
+            {
+                Console.WriteLine(name[j] + " : " + CheckFileExtension(submission[j]));
+            }
 
         }
     }
